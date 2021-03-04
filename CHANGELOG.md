@@ -1,4 +1,154 @@
-##changelog
+# changelog
+
+## 2.1.51@20180716
+* [add] 初始化小程序-项目模板: jdf wx init xxx
+* [add] 初始化小程序-项目页面: jdf wx page xxx
+
+## 2.1.50@20180702
+* [add] 增加配置，过滤不需要添加js文件id和依赖的文件或文件夹
+
+		build: {
+			"isEs6Exclude":"aa\/lib\/|xxx.js"
+		}
+		
+* [add] node-sass更新到最新版本，删除jdf-png-native依赖
+
+## 2.1.44@20170915
+* [add]增加jdf cp命令
+
+		output: {
+			"cpDirPath": [
+				{
+					"userRoot": "", // 默认取用户目录
+					"sourcePath": "", // 源目录
+					"targetPath": "" // 目标目录
+				}
+			]
+		}
+
+## 2.1.43@20170809
+* [add]增加zip打包output文件夹 
+
+		output: {
+			"zipOutput": true
+		}
+
+## 2.1.40@20170419
+* [fix]不加cdn前缀 也不加projectPath 即保持默认的路径 的输出
+
+## 2.1.39@20170418
+* 增加输出的html文件夹名称配置即  
+
+		"outputHtmlDir": ""
+
+## 2.1.36@20170328
+* [add]增加不进行es6编译的文件配置 `build.isEs6Exclude" 
+
+## 2.1.35@20170313
+* [fix]BrowserSync merage `localServerPort` config
+
+### 2.1.34@20170308
+* [bug]win7下`jdf b`二维码显示不全
+
+### 2.1.32@20170302
+* [add]低版本`jdf -v`时增加升级提示
+
+
+### 2.1.28@20170224
+* [add]区分开发环境，预发环境可用`jdf u -prod`，而线上环境可用`jdf u -pub`，那么html中替换字符串可用`output.htmlContentReplaceInProduce`和`output.htmlContentReplaceInPublish`，js中替换字符串可用`output.jsContentReplaceInProduce`和`output.jsContentReplaceInPublish`，config.json相关配置如下：
+
+		"output":{
+			"htmlContentReplace":[{"from":"mydomain.xxx.com","to":"all.xxx.com"}],
+			"htmlContentReplaceInProduce":[{"from":"mydomain.xxx.com","to":"prod.xxx.com"}],
+			"htmlContentReplaceInPublish":[{"from":"mydomain.xxx.com","to":"publish.xxx.com"}],
+			"jsContentReplace":[{"from":"mydomain.xxx.com","to":"all.xxx.com"}],
+			"jsContentReplaceInProduce":[{"from":"mydomain.xxx.com","to":"prod.xxx.com"}],
+			"jsContentReplaceInPublish":[{"from":"mydomain.xxx.com","to":"pub.xxx.com"}]
+		}
+
+* [fix]jdf o -nc，jdf o -nh，jdf o -preview功能保留，隐藏其入口
+
+### 2.1.26@20170224
+* [add]vm的数据源可以为外部链接 {%widget name="test" data='http://xxx.com/xxx.json'%}
+
+### 2.1.25@20170224
+* [fix]uglify-js升级至2.7.5
+
+### 2.1.24@20170224
+* [fix]jdf_demo下载地址换成七牛云
+
+### 2.1.23@20170123
+* [bug]build.combineWidgetCss bug fix
+
+### 2.1.22@20170119
+* [bug]要编译的文件后缀正则fix
+
+### 2.1.21@20170113
+* [fix]win7下node v4.2.6 v5.12.0 v6.9.4进行回归测试node-sass和jdf-png-native两个模块，安装正常，node v7.4.0版本暂不支持
+* [fix]移除对webpack打包的支持
+
+### 2.1.20@20170111
+* [fix]jdf_init修正
+
+### 2.1.19@20170106
+* [fix]jdf-sass不再维护，替换为官方的node-sass
+
+### 2.1.18@20170105
+* [fix]优化整体JDF帮助文档
+
+### 2.1.13@20161226
+* [add]移动优先，`jdf build`时默认在命令行下显示二维码，方便手机扫码调试，关闭方法是增加配置，即配置`build`中的`qrcode`为`false`
+* [bug]cdn为空时js路径替换问题修正
+* [bug]启动多个项目时server端口号不能逐渐累加
+* [fix]jdf output时默认输出html文件夹
+* [fix]修正config.json和template/index.html的引用路径
+
+### 2.1.12@20161222
+
+* [bug]fix win7 upload(linux type)
+
+### 2.1.10@20161214
+
+* [add]增加jdf o输出时html和js文件内容替换，比如html中的脚本url或者js中的接口url，即配置`output`中的`htmlContentReplace`和`jsContentReplace`
+* [add]jdf server运行时提示当前机器ip和缓存文件路径（受browser-sync的启发，特表感谢）
+* [add]提升编译效率，复制文件夹时过滤不需要编译的文件，同时增加配置也可过滤，即配置`build`的`excludeFiles`
+
+### 2.1.9@20161208
+
+* [add]增加编译时server用[browser-sync](https://browsersync.io/)(配置jdf.config.build.hasBrowserSync为true)
+* [add]build时是否在cmd里提示编译信息(配置jdf.config.build.hasCmdLog为true)
+* [fix]build sass/less时报错增加颜色
+* [bug]css编译写内容修正
+* [add]支持命令行下把本地文件夹中所有文件上传至外端机器目录@20161205 `jdf u -c ./localDirxxx /serverDirxxx serverIp`
+
+### 2.1.7@2061130
+* [add]支持css加autoprefixer，即配置`build`中的`autoprefixer`为`true`
+	
+### 2.1.6@20161130
+* [add]支持直接上传至linux server，server上需要有php环境和receiver.php，即增加`serverType`配置为`linux`
+* [bug]https://github.com/putaoshu/jdf/pull/38 对commander.js统一处理相关内容做修正
+
+### 2.1.5@20161128
+* [fix]es6项目只处理js文件夹下的入口文件，即配置build.es6Entry，widget目录中的js不会做处理，主要webpack对js文件中require和import暂时只能处理一个
+
+### 2.1.4@20161125
+* [bug]webpack入口路径fix by cdwangdongwu
+
+### 2.1.2@20161121
+* [fix]server页面适应移动端访问
+
+### 2.1.2@2016-11-27
+* [fix]server页面适应移动端访问
+* <del>[add]支持用webpack打包es6，入口参数为build.isEs6 && build.es6Entry</del>
+
+### .............这是一个分界线.............
+
+### 2.0.7 / 2016-9-14 10:50:00
+* [add]支持图片生成webp格式，并更新相关css图片链接
+
+### 2.0.3 / 2016-7-6 13:50:00
+* [bug]修复无法输出类似icon-null.png的文件名称
+* [add]支持输出font icon
 
 ### 2.0.1 / 2016-4-28 16:39:00
 * [add]cssSprite支持水平合并
@@ -438,3 +588,4 @@
 * 初步的远程版本交互和管理
 * 本地server
 * 本地变更的文件或文件夹自动传至本地server文件夹
+

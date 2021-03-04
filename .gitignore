@@ -4,3 +4,6 @@ npm-debug.log
 .idea
 .DS_Store
 test/build
+temp
+node_modules_v6/
+package-lock.json
